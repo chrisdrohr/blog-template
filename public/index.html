@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="./manifest.json">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <title>Chris Rohr</title>
+  <body>
+    <div id="root"></div>
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <script type="text/javascript" src="/dist/app.bundle.js"></script>
+    <!--Service Worker-->
+    <script>
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+            console.log('Service Worker and Push is supported');
+
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+                    // Registration was successful
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    // registration failed :(
+                    console.log('ServiceWorker registration failed: ', err);
+                }).catch(function(err) {
+                    console.log(err)
+                });
+            });
+        } else {
+            console.warn('Push messaging is not supported');
+            console.log('service worker is not supported');
+        }
+    </script>
+  </body>
+</html>
